@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Pusok_Beata_Lab8.Data;
 using Pusok_Beata_Lab8.Models;
 
-namespace Pusok_Beata_Lab8.Pages.Books
+namespace Pusok_Beata_Lab8.Pages.Categories
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,11 @@ namespace Pusok_Beata_Lab8.Pages.Books
             _context = context;
         }
 
-        public IList<Book> Book { get;set; }
+        public IList<Category> Category { get;set; }
 
         public async Task OnGetAsync()
         {
-            Book = await _context.Book
-                .Include(b => b.Publisher)
-                .ToListAsync();
+            Category = await _context.Category.ToListAsync();
         }
     }
 }

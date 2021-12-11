@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Pusok_Beata_Lab8.Data;
 using Pusok_Beata_Lab8.Models;
 
-namespace Pusok_Beata_Lab8.Pages.Books
+namespace Pusok_Beata_Lab8.Pages.Publishers
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace Pusok_Beata_Lab8.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; }
+        public Publisher Publisher { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,13 +30,12 @@ namespace Pusok_Beata_Lab8.Pages.Books
                 return NotFound();
             }
 
-            Book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
+            Publisher = await _context.Publisher.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Book == null)
+            if (Publisher == null)
             {
                 return NotFound();
             }
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
             return Page();
         }
 
@@ -49,7 +48,7 @@ namespace Pusok_Beata_Lab8.Pages.Books
                 return Page();
             }
 
-            _context.Attach(Book).State = EntityState.Modified;
+            _context.Attach(Publisher).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +56,7 @@ namespace Pusok_Beata_Lab8.Pages.Books
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(Book.ID))
+                if (!PublisherExists(Publisher.ID))
                 {
                     return NotFound();
                 }
@@ -70,9 +69,9 @@ namespace Pusok_Beata_Lab8.Pages.Books
             return RedirectToPage("./Index");
         }
 
-        private bool BookExists(int id)
+        private bool PublisherExists(int id)
         {
-            return _context.Book.Any(e => e.ID == id);
+            return _context.Publisher.Any(e => e.ID == id);
         }
     }
 }

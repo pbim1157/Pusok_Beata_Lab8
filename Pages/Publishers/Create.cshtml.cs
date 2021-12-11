@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Pusok_Beata_Lab8.Data;
 using Pusok_Beata_Lab8.Models;
 
-namespace Pusok_Beata_Lab8.Pages.Books
+namespace Pusok_Beata_Lab8.Pages.Publishers
 {
     public class CreateModel : PageModel
     {
@@ -21,12 +21,11 @@ namespace Pusok_Beata_Lab8.Pages.Books
 
         public IActionResult OnGet()
         {
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
             return Page();
         }
 
         [BindProperty]
-        public Book Book { get; set; }
+        public Publisher Publisher { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -37,7 +36,7 @@ namespace Pusok_Beata_Lab8.Pages.Books
                 return Page();
             }
 
-            _context.Book.Add(Book);
+            _context.Publisher.Add(Publisher);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
