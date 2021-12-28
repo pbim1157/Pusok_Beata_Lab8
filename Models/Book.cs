@@ -16,7 +16,7 @@ namespace Pusok_Beata_Lab8.Models
         [Display(Name = "Book Title")]
         public string Title { get; set; }
         [RegularExpression(@"^[A-Z][a-z]+\s[A-Z][a-z]+$"), 
-           // ErrorMessage = "Numele autorului trebuie sa fie de forma 'Prenume Nume'"), 
+            ErrorMessage = "Numele autorului trebuie sa fie de forma 'Prenume Nume'"), 
             Required, StringLength(50, MinimumLength = 3)]
         public string Author { get; set; }
 
